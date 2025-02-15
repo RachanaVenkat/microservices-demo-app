@@ -1,0 +1,35 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: order-service
+  datasource:
+    url: jdbc:h2:mem:orderdb  # In-memory H2 database
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+springdoc:
+  api-docs:
+    path: /order-service/v3/api-docs
+  swagger-ui:
+    path: /order-service/swagger-ui.html
+    operationsSorter: alpha
+    tagsSorter: alpha
+
+openapi:
+  servers:
+    - url: "http://api-gateway:8080"
+      description: "API Gateway Server"
+    - url: "http://order:8083"
+      description: "Order Service"
